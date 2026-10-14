@@ -1,0 +1,1089 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Application Form</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      :root {
+        --primary: #2563eb;
+        --primary-dark: #1d4ed8;
+        --secondary: #64748b;
+        --text-dark: #1e293b;
+        --text-light: #64748b;
+        --white: #fff;
+        --radius: 8px;
+        --shadow:
+          0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        --t: all 0.3s ease;
+        --error: #ef4444;
+      }
+      body {
+        font-family: "Inter", Arial, sans-serif;
+        line-height: 1.6;
+        color: var(--text-dark);
+        background: #fff;
+        overflow-x: hidden;
+        padding-top: 38px;
+      }
+      /* ==== MINIMAL HEADER ==== */
+      .countdown-banner {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: #fff;
+        padding: 6px 12px;
+        z-index: 9999;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+        font-size: 12px;
+      }
+      .banner-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      .urgent-tag {
+        background: #ff4444;
+        padding: 2px 7px;
+        border-radius: 10px;
+        font-weight: 700;
+        font-size: 10px;
+        white-space: nowrap;
+      }
+      .banner-text {
+        font-size: 12px;
+        text-align: center;
+      }
+      .banner-text strong {
+        color: #ffeb3b;
+        font-size: 13px;
+      }
+      .countdown-inline {
+        display: flex;
+        gap: 5px;
+        background: rgba(255, 255, 255, 0.2);
+        padding: 2px 7px;
+        border-radius: 12px;
+      }
+      .time-unit {
+        font-weight: 700;
+        font-size: 11px;
+      }
+      .time-unit span {
+        color: #ffeb3b;
+      }
+      .breaking-inline {
+        font-size: 11px;
+        white-space: nowrap;
+      }
+      .breaking-inline strong {
+        color: #ffeb3b;
+      }
+      .contact-spacer {
+        height: 20px;
+        width: 100%;
+      }
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 1rem;
+      }
+      .application-container {
+        display: flex;
+        flex-direction: column;
+        margin: 1rem 0 2rem;
+        background: #fff;
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        overflow: hidden;
+      }
+      .application-left {
+        flex: 1;
+        background: linear-gradient(
+          135deg,
+          var(--primary) 0%,
+          var(--primary-dark) 100%
+        );
+        color: #fff;
+        padding: 2rem 1.5rem;
+        display: flex;
+        align-items: center;
+      }
+      .application-info h2 {
+        font-size: 1.7rem;
+        margin-bottom: 1rem;
+        font-weight: 700;
+        line-height: 1.3;
+        text-align: center;
+      }
+      .application-info p {
+        font-size: 1rem;
+        margin-bottom: 1.3rem;
+        line-height: 1.6;
+        opacity: 0.9;
+        text-align: center;
+      }
+      .benefits-list {
+        display: flex;
+        flex-direction: column;
+        gap: 0.7rem;
+      }
+      .benefit-item {
+        display: flex;
+        align-items: center;
+        gap: 0.7rem;
+        font-size: 0.9rem;
+      }
+      .benefit-icon {
+        font-size: 1.1rem;
+        width: 24px;
+        text-align: center;
+      }
+      .application-right {
+        flex: 1;
+        padding: 2rem 1.5rem;
+      }
+      .form-header {
+        text-align: center;
+        margin-bottom: 1.3rem;
+      }
+      .form-header h3 {
+        font-size: 1.5rem;
+        margin-bottom: 0.4rem;
+        font-weight: 600;
+      }
+      .form-header p {
+        color: var(--text-light);
+        font-size: 0.9rem;
+      }
+      /* ==== FORM FIELDS ==== */
+      .form-group.floating {
+        position: relative;
+        margin-bottom: 1.5rem;
+      }
+      .form-group.floating input {
+        width: 100%;
+        padding: 1rem 0.8rem 0.5rem;
+        border: 2px solid #e2e8f0;
+        border-radius: var(--radius);
+        font-size: 1rem;
+        background: #fff;
+        transition: var(--t);
+        height: 52px;
+      }
+      .form-group.floating label {
+        position: absolute;
+        top: 50%;
+        left: 0.8rem;
+        transform: translateY(-50%);
+        color: var(--text-light);
+        font-size: 1rem;
+        pointer-events: none;
+        transition: var(--t);
+        background: #fff;
+        padding: 0 0.3rem;
+      }
+      .form-group.floating input:focus,
+      .form-group.floating input:not(:placeholder-shown) {
+        border-color: var(--primary);
+        outline: none;
+      }
+      .form-group.floating input:focus + label,
+      .form-group.floating input:not(:placeholder-shown) + label {
+        top: 0;
+        font-size: 0.8rem;
+        color: var(--primary);
+        font-weight: 500;
+      }
+      /* ==== ERROR STATE FOR FIELDS ==== */
+      .form-group.floating input.error {
+        border-color: var(--error) !important;
+      }
+      .form-group.floating input.error + label {
+        color: var(--error) !important;
+      }
+      .field-error {
+        color: var(--error);
+        font-size: 12px;
+        margin-top: 4px;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        font-weight: 500;
+        animation: errIn 0.25s ease;
+      }
+      .field-error::before {
+        content: "⚠";
+        font-size: 12px;
+      }
+      @keyframes errIn {
+        from {
+          opacity: 0;
+          transform: translateY(-4px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .form-row {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+        margin-bottom: 0.5rem !important;
+      }
+      .form-row .form-group {
+        margin-bottom: 0.8rem !important;
+      }
+      .form-row.three-column {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        margin-bottom: 0.5rem !important;
+      }
+      .form-row.three-column .form-group {
+        flex: 1;
+        margin-bottom: 0;
+      }
+      /* ==== CHECKBOX ==== */
+      .checkbox-group {
+        margin-bottom: 1rem;
+      }
+      .checkbox-label {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.75rem;
+        cursor: pointer;
+        font-size: 0.9rem;
+        line-height: 1.4;
+      }
+      .checkbox-label input[type="checkbox"] {
+        display: none;
+      }
+      .checkmark {
+        width: 20px;
+        height: 20px;
+        border: 2px solid #cbd5e0;
+        border-radius: 3px;
+        position: relative;
+        flex-shrink: 0;
+        margin-top: 0.1rem;
+        transition: var(--t);
+      }
+      .checkbox-label input[type="checkbox"]:checked + .checkmark {
+        background: var(--primary);
+        border-color: var(--primary);
+      }
+      .checkbox-label input[type="checkbox"]:checked + .checkmark::after {
+        content: "✓";
+        position: absolute;
+        color: #fff;
+        font-size: 12px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+      .checkbox-label.terms-error .checkmark {
+        border-color: var(--error);
+        box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15);
+      }
+      /* ==== SUBMIT ==== */
+      .submit-btn {
+        background: var(--primary);
+        color: #fff;
+        font-size: 1rem;
+        font-weight: 600;
+        padding: 1rem 2rem;
+        border: none;
+        border-radius: var(--radius);
+        cursor: pointer;
+        transition: var(--t);
+        width: 100%;
+        margin-top: 1rem;
+        height: 52px;
+        display: block;
+        text-align: center;
+        position: relative;
+      }
+      .submit-btn:hover:not(:disabled) {
+        background: var(--primary-dark);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+      }
+      .submit-btn:disabled {
+        background: var(--secondary);
+        cursor: not-allowed;
+        transform: none;
+      }
+      .btn-loading .spinner {
+        display: inline-block;
+        width: 16px;
+        height: 16px;
+        border: 2px solid transparent;
+        border-top: 2px solid #fff;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        margin-right: 8px;
+      }
+      @keyframes spin {
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+      .required {
+        color: var(--error);
+      }
+      .field-helper {
+        display: flex;
+        gap: 6px;
+        margin-top: 2px;
+        font-size: 11px;
+        color: #64748b;
+        line-height: 1.2;
+      }
+      footer {
+        background: var(--text-dark);
+        color: #fff;
+        text-align: center;
+        padding: 1.5rem;
+        margin-top: 2rem;
+      }
+      /* ==== SUCCESS ==== */
+      .form-success-message {
+        text-align: center;
+        padding: 2rem;
+        background: #fff;
+        border-radius: 12px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        margin: 1rem 0;
+        animation: fadeInUp 0.6s ease-out;
+      }
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .success-icon {
+        width: 80px;
+        height: 80px;
+        background: #10b981;
+        color: #fff;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2rem;
+        font-weight: 700;
+        margin: 0 auto 1.5rem;
+        animation: bounceIn 0.6s ease-out;
+      }
+      @keyframes bounceIn {
+        0% {
+          opacity: 0;
+          transform: scale(0.3);
+        }
+        50% {
+          opacity: 1;
+          transform: scale(1.05);
+        }
+        70% {
+          transform: scale(0.9);
+        }
+        100% {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+      .form-success-message h3 {
+        color: #10b981;
+        font-size: 1.8rem;
+        margin-bottom: 1rem;
+        font-weight: 700;
+      }
+      .form-success-message p {
+        color: #6b7280;
+        font-size: 1.1rem;
+        margin-bottom: 1.5rem;
+        line-height: 1.6;
+      }
+      .next-steps {
+        background: #f8fafc;
+        padding: 1.5rem;
+        border-radius: 8px;
+        margin: 1.5rem 0;
+        text-align: left;
+      }
+      .next-steps h3 {
+        color: #374151;
+        font-weight: 600;
+        margin-bottom: 1rem;
+        font-size: 1.2rem;
+        text-align: center;
+      }
+      .next-steps ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+      .next-steps li {
+        display: flex;
+        gap: 1rem;
+        margin-bottom: 1.2rem;
+        align-items: flex-start;
+      }
+      .step-number {
+        background: var(--primary);
+        color: #fff;
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        font-size: 0.85rem;
+        flex-shrink: 0;
+        margin-top: 0.1rem;
+      }
+      .next-steps li div:last-child {
+        color: #4b5563;
+        font-size: 0.95rem;
+        line-height: 1.5;
+      }
+      .next-steps strong {
+        color: #1f2937;
+        display: block;
+        margin-bottom: 0.2rem;
+      }
+      .share-section {
+        background: #f0f9ff;
+        padding: 1.5rem;
+        border-radius: 8px;
+        margin: 1.5rem 0;
+        border: 1px solid #e0f2fe;
+      }
+      .share-section p {
+        color: #0369a1;
+        font-weight: 600;
+        margin-bottom: 1rem;
+      }
+      .share-buttons {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin-bottom: 1rem;
+      }
+      .share-btn {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 8px;
+        font-size: 0.95rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        min-width: 180px;
+      }
+      .whatsapp-btn {
+        background: #25d366;
+        color: #fff;
+      }
+      .whatsapp-btn:hover {
+        background: #128c7e;
+        transform: translateY(-2px);
+      }
+      .copy-link-btn {
+        background: #3b82f6;
+        color: #fff;
+      }
+      .copy-link-btn:hover {
+        background: #2563eb;
+        transform: translateY(-2px);
+      }
+      .share-icon {
+        font-size: 1.2rem;
+      }
+      .share-note {
+        color: #6b7280;
+        font-style: italic;
+      }
+      .copy-feedback {
+        margin-top: 0.5rem;
+        color: #059669;
+        font-weight: 500;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+      .copy-feedback.show {
+        opacity: 1;
+      }
+      @media (min-width: 768px) {
+        .container {
+          padding: 1.5rem;
+        }
+        .application-container {
+          flex-direction: row;
+        }
+        .application-left,
+        .application-right {
+          padding: 2.5rem;
+        }
+        .application-info h2,
+        .application-info p {
+          text-align: left;
+        }
+        .form-row {
+          flex-direction: row;
+          gap: 1rem;
+        }
+        .form-row.three-column {
+          flex-direction: row;
+          gap: 1rem;
+        }
+        .form-row.three-column .form-group {
+          margin-bottom: 1.5rem;
+        }
+      }
+      @media (min-width: 1024px) {
+        .container {
+          padding: 2rem;
+        }
+        .application-container {
+          gap: 2rem;
+          margin: 2rem 0;
+        }
+        .application-right {
+          flex: 1.5;
+        }
+        .form-group.floating input {
+          height: 56px;
+          padding: 1.2rem 1rem 0.6rem;
+        }
+        .submit-btn {
+          height: 56px;
+          font-size: 1.1rem;
+        }
+      }
+      @media (max-width: 480px) {
+        .banner-content {
+          gap: 5px;
+          font-size: 10px;
+        }
+        .banner-text {
+          font-size: 10px;
+        }
+        .banner-text strong {
+          font-size: 11px;
+        }
+        .time-unit {
+          font-size: 10px;
+        }
+        .breaking-inline {
+          display: none;
+        }
+        .container {
+          padding: 1rem 0.8rem;
+        }
+        .application-left,
+        .application-right {
+          padding: 1.5rem 1rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ==== MINIMAL HEADER ==== -->
+    <div class="countdown-banner">
+      <div class="banner-content">
+        <span class="urgent-tag">🚨 URGENT</span>
+        <span class="banner-text"
+          >Only <strong id="positions">15</strong> left ·
+          <span id="month-year">Oct 31</span></span
+        >
+        <div class="countdown-inline">
+          <span class="time-unit"><span id="days">2</span>d</span>
+          <span class="time-unit"><span id="hours">12</span>h</span>
+          <span class="time-unit"><span id="minutes">25</span>m</span>
+          <span class="time-unit"><span id="seconds">11</span>s</span>
+        </div>
+        <span class="breaking-inline"
+          >⚡ <strong>50 New</strong> Positions!</span
+        >
+      </div>
+    </div>
+
+    <div class="contact-spacer"></div>
+
+    <div class="container">
+      <div class="application-container">
+        <div class="application-left">
+          <div class="application-info">
+            <h2>Join Our Secret Shopper Evaluator Team</h2>
+            <p>
+              If you're interested in our open positions, start by applying
+              here. We're looking for detail-oriented individuals who can
+              provide valuable insights into customer experiences.
+            </p>
+            <div class="benefits-list">
+              <div class="benefit-item">
+                <span class="benefit-icon">💰</span
+                ><span>$750 per assignment + bonuses</span>
+              </div>
+              <div class="benefit-item">
+                <span class="benefit-icon">⏰</span><span>Flexible hours</span>
+              </div>
+              <div class="benefit-item">
+                <span class="benefit-icon">🏠</span
+                ><span>Work in your local area</span>
+              </div>
+              <div class="benefit-item">
+                <span class="benefit-icon">📊</span
+                ><span>No experience required</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="application-right">
+          <div class="form-header">
+            <h3>Apply Now</h3>
+            <p>Fill out the form below to start your application</p>
+          </div>
+          <div class="form-content">
+            <form id="applicationForm" novalidate>
+              <div class="form-section">
+                <div class="form-group floating">
+                  <input
+                    type="text"
+                    id="fullname"
+                    name="fullname"
+                    placeholder=" "
+                  />
+                  <label for="fullname"
+                    >Full Name <span class="required">*</span></label
+                  >
+                </div>
+                <div class="form-group floating">
+                  <input
+                    type="text"
+                    id="address"
+                    name="address"
+                    placeholder=" "
+                  />
+                  <label for="address"
+                    >Street Address <span class="required">*</span></label
+                  >
+                </div>
+                <div class="form-row three-column">
+                  <div class="form-group floating">
+                    <input type="text" id="city" name="city" placeholder=" " />
+                    <label for="city"
+                      >City <span class="required">*</span></label
+                    >
+                  </div>
+                  <div class="form-group floating">
+                    <input
+                      type="text"
+                      id="state"
+                      name="state"
+                      placeholder=" "
+                    />
+                    <label for="state"
+                      >State <span class="required">*</span></label
+                    >
+                  </div>
+                  <div class="form-group floating">
+                    <input
+                      type="text"
+                      id="zipcode"
+                      name="zipcode"
+                      placeholder=" "
+                    />
+                    <label for="zipcode"
+                      >Zip Code <span class="required">*</span></label
+                    >
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group floating">
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      placeholder=" "
+                    />
+                    <label for="email"
+                      >Email Address <span class="required">*</span></label
+                    >
+                    <div class="field-helper">
+                      <span class="helper-icon">ℹ️</span
+                      ><span
+                        >Use your active email address for assignment
+                        notifications</span
+                      >
+                    </div>
+                  </div>
+                  <div class="form-group floating">
+                    <input type="tel" id="phone" name="phone" placeholder=" " />
+                    <label for="phone"
+                      >Phone Number <span class="required">*</span></label
+                    >
+                  </div>
+                </div>
+                <div class="checkbox-group">
+                  <label class="checkbox-label" id="termsLabel">
+                    <input type="checkbox" name="terms" id="terms" />
+                    <span class="checkmark"></span>
+                    I agree to the terms and conditions
+                    <span class="required">*</span>
+                  </label>
+                </div>
+                <div class="checkbox-group">
+                  <label class="checkbox-label">
+                    <input type="checkbox" name="newsletter" />
+                    <span class="checkmark"></span>
+                    I want to receive updates about high-paying assignments and
+                    exclusive opportunities
+                  </label>
+                </div>
+                <button type="submit" class="submit-btn" id="submitBtn">
+                  <span class="btn-text">Submit Application</span>
+                  <span class="btn-loading" style="display: none"
+                    ><span class="spinner"></span>Submitting...</span
+                  >
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <p>&copy; <span id="year"></span> All rights reserved.</p>
+    </footer>
+
+    <script>
+      const GOOGLE_SCRIPT_URL =
+        "https://script.google.com/macros/s/AKfycbyCGumuqiurqev-dQ-glpkHka9HGzL9O182tWBcV4r_u4u2RMb_ONt-UGMVOcRBZePmrw/exec";
+
+      document.addEventListener("DOMContentLoaded", function () {
+        const form = document.getElementById("applicationForm");
+        const submitBtn = document.getElementById("submitBtn");
+        const termsCheckbox = document.getElementById("terms");
+        const termsLabel = document.getElementById("termsLabel");
+
+        document.getElementById("year").textContent = new Date().getFullYear();
+        initFloatingLabels();
+        initCountdown();
+        attachLiveValidation();
+
+        termsCheckbox.addEventListener("change", function () {
+          if (this.checked) termsLabel.classList.remove("terms-error");
+        });
+
+        function attachLiveValidation() {
+          [
+            "fullname",
+            "address",
+            "city",
+            "state",
+            "zipcode",
+            "email",
+            "phone",
+          ].forEach(function (id) {
+            const el = document.getElementById(id);
+            el.addEventListener("input", function () {
+              clearFieldError(this);
+            });
+            el.addEventListener("blur", function () {
+              validateField(this);
+            });
+          });
+        }
+
+        form.addEventListener("submit", async function (e) {
+          e.preventDefault();
+
+          const fields = [
+            "fullname",
+            "address",
+            "city",
+            "state",
+            "zipcode",
+            "email",
+            "phone",
+          ];
+          let firstInvalid = null;
+          fields.forEach(function (id) {
+            const el = document.getElementById(id);
+            if (!validateField(el) && !firstInvalid) firstInvalid = el;
+          });
+
+          if (!termsCheckbox.checked) {
+            termsLabel.classList.add("terms-error");
+            if (!firstInvalid) firstInvalid = termsCheckbox;
+          }
+
+          if (firstInvalid) {
+            firstInvalid.focus({ preventScroll: true });
+            firstInvalid.scrollIntoView({
+              behavior: "smooth",
+              block: "center",
+            });
+            return;
+          }
+
+          const btnText = submitBtn.querySelector(".btn-text");
+          const btnLoading = submitBtn.querySelector(".btn-loading");
+          submitBtn.disabled = true;
+          btnText.style.display = "none";
+          btnLoading.style.display = "inline-block";
+
+          try {
+            const fd = new FormData(form);
+            const data = {
+              fullname: (fd.get("fullname") || "").trim(),
+              address: (fd.get("address") || "").trim(),
+              city: (fd.get("city") || "").trim(),
+              state: (fd.get("state") || "").trim(),
+              zipcode: (fd.get("zipcode") || "").trim(),
+              email: (fd.get("email") || "").trim(),
+              phone: (fd.get("phone") || "").trim(),
+              terms: fd.get("terms") ? "Yes" : "No",
+              newsletter: fd.get("newsletter") ? "Yes" : "No",
+              timestamp: new Date().toISOString(),
+              source: "Standalone Application Form",
+            };
+
+            await fetch(GOOGLE_SCRIPT_URL, {
+              method: "POST",
+              mode: "no-cors",
+              headers: { "Content-Type": "text/plain;charset=utf-8" },
+              body: JSON.stringify(data),
+            });
+
+            showSuccess(form);
+          } catch (err) {
+            console.error("Submit error:", err);
+            alert(
+              "There was an error submitting your application. Please try again.",
+            );
+            submitBtn.disabled = false;
+            btnText.style.display = "inline-block";
+            btnLoading.style.display = "none";
+          }
+        });
+
+        function validateField(el) {
+          const id = el.id;
+          const value = el.value.trim();
+          let message = "";
+
+          if (!value) {
+            const labels = {
+              fullname: "Full Name",
+              address: "Street Address",
+              city: "City",
+              state: "State",
+              zipcode: "Zip Code",
+              email: "Email Address",
+              phone: "Phone Number",
+            };
+            message = labels[id] + " is required";
+          } else if (id === "email") {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+            if (!emailRegex.test(value))
+              message = "Please enter a valid email address";
+          } else if (id === "phone") {
+            const digits = value.replace(/\D/g, "");
+            if (digits.length < 7)
+              message = "Please enter a valid phone number";
+          } else if (id === "zipcode") {
+            if (value.length < 3) message = "Please enter a valid zip code";
+          } else if (id === "fullname") {
+            if (value.length < 2) message = "Please enter your full name";
+          }
+
+          if (message) {
+            showFieldError(el, message);
+            return false;
+          }
+          clearFieldError(el);
+          return true;
+        }
+
+        function showFieldError(el, message) {
+          el.classList.add("error");
+          const parent = el.parentElement;
+          let err = parent.querySelector(".field-error");
+          if (!err) {
+            err = document.createElement("div");
+            err.className = "field-error";
+            parent.appendChild(err);
+          }
+          err.textContent = message;
+        }
+
+        function clearFieldError(el) {
+          el.classList.remove("error");
+          const parent = el.parentElement;
+          const err = parent.querySelector(".field-error");
+          if (err) err.remove();
+        }
+
+        function initFloatingLabels() {
+          document
+            .querySelectorAll(".form-group.floating input")
+            .forEach(function (input) {
+              if (input.value) input.parentElement.classList.add("filled");
+              input.addEventListener("focus", function () {
+                this.parentElement.classList.add("focused");
+              });
+              input.addEventListener("blur", function () {
+                if (!this.value) this.parentElement.classList.remove("focused");
+                this.parentElement.classList.toggle("filled", !!this.value);
+              });
+            });
+        }
+
+        function showSuccess(formEl) {
+          formEl.style.display = "none";
+          const wrap = formEl.closest(".form-content") || formEl.parentNode;
+          const div = document.createElement("div");
+          div.className = "form-success-message";
+          div.innerHTML = `
+      <div class="success-icon">✓</div>
+      <h3>Thank You!</h3>
+      <p>Application submitted successfully! We will contact you soon.</p>
+      <div class="next-steps">
+        <h3>What Happens Next?</h3>
+        <ul>
+          <li><div class="step-number">1</div><div><strong>Confirmation Packet</strong><br>You will receive your confirmation packet in the mail within 3-7 business days</div></li>
+          <li><div class="step-number">2</div><div><strong>First Task & Guidelines</strong><br>Your confirmation packet will include your first task and detailed guidelines</div></li>
+          <li><div class="step-number">3</div><div><strong>Complete Your First Task</strong><br>Successfully complete your first assignment following the provided guidelines</div></li>
+          <li><div class="step-number">4</div><div><strong>Unlock More Tasks</strong><br>After successful completion of your first task, you'll be able to access more assignments</div></li>
+        </ul>
+      </div>
+      <div class="share-section">
+        <p><strong>Know someone who might be interested?</strong></p>
+        <div class="share-buttons">
+          <button class="share-btn whatsapp-btn" onclick="shareViaWhatsApp()"><span class="share-icon">📱</span> Share via WhatsApp</button>
+          <button class="share-btn copy-link-btn" onclick="copyApplicationLink()"><span class="share-icon">🔗</span> Copy Application Link</button>
+        </div>
+        <div class="share-note"><small>Help your friends and family apply for this amazing opportunity!</small></div>
+        <div class="copy-feedback"></div>
+      </div>`;
+          wrap.appendChild(div);
+          div.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+
+        function initCountdown() {
+          const last = new Date(
+            new Date().getFullYear(),
+            new Date().getMonth() + 1,
+            0,
+          );
+          const target = new Date(
+            last.getFullYear(),
+            last.getMonth(),
+            last.getDate(),
+            23,
+            59,
+            59,
+          ).getTime();
+          const months = [
+            "Jan",
+            "Feb",
+            "Mar",
+            "Apr",
+            "May",
+            "Jun",
+            "Jul",
+            "Aug",
+            "Sep",
+            "Oct",
+            "Nov",
+            "Dec",
+          ];
+          document.getElementById("month-year").textContent =
+            months[last.getMonth()] + " " + last.getDate();
+          document.getElementById("positions").textContent =
+            Math.floor(Math.random() * 26) + 10;
+          function tick() {
+            const d = target - Date.now();
+            if (d < 0) return;
+            document.getElementById("days").textContent = Math.floor(
+              d / 86400000,
+            );
+            document.getElementById("hours").textContent = Math.floor(
+              (d % 86400000) / 3600000,
+            );
+            document.getElementById("minutes").textContent = Math.floor(
+              (d % 3600000) / 60000,
+            );
+            document.getElementById("seconds").textContent = Math.floor(
+              (d % 60000) / 1000,
+            );
+          }
+          tick();
+          setInterval(tick, 1000);
+        }
+      });
+
+      function shareViaWhatsApp() {
+        const url = window.location.href;
+        const text =
+          "Check out this amazing opportunity! I just applied and thought you might be interested too. Apply here: ";
+        window.open(
+          "https://wa.me/?text=" + encodeURIComponent(text + url),
+          "_blank",
+        );
+      }
+
+      function copyApplicationLink() {
+        const url = window.location.href;
+        const tmp = document.createElement("input");
+        tmp.value = url;
+        document.body.appendChild(tmp);
+        tmp.select();
+        tmp.setSelectionRange(0, 99999);
+        try {
+          document.execCommand("copy");
+          const fb = document.querySelector(".copy-feedback");
+          if (fb) {
+            fb.textContent = "✓ Link copied to clipboard!";
+            fb.classList.add("show");
+            setTimeout(() => fb.classList.remove("show"), 3000);
+          }
+        } catch (e) {
+          window.open(url, "_blank");
+        }
+        document.body.removeChild(tmp);
+      }
+    </script>
+  </body>
+</html>
