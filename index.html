@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Application Form</title>
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap"
       rel="stylesheet"
     />
     <style>
@@ -15,38 +15,43 @@
         box-sizing: border-box;
       }
       :root {
-        --primary: #2563eb;
-        --primary-dark: #1d4ed8;
-        --secondary: #64748b;
-        --text-dark: #1e293b;
-        --text-light: #64748b;
-        --white: #fff;
-        --radius: 8px;
-        --shadow:
-          0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        /* ==== NEW THEME — matches editorial sample ==== */
+        --bg: #e8e0d5; /* warm beige background */
+        --bg-soft: #f3ede4; /* lighter beige card */
+        --primary: #1e3d34; /* deep forest green */
+        --primary-dark: #162e27; /* darker green */
+        --primary-light: #2c5548; /* mid green */
+        --accent: #c9b79c; /* tan accent */
+        --text-dark: #1e3d34; /* deep green text */
+        --text-body: #3d3a33; /* warm dark gray */
+        --text-light: #6b6459; /* muted brown-gray */
+        --white: #ffffff;
+        --radius: 10px;
+        --shadow: 0 6px 20px -6px rgba(30, 61, 52, 0.15);
         --t: all 0.3s ease;
-        --error: #ef4444;
+        --error: #b13b2e;
       }
       body {
         font-family: "Inter", Arial, sans-serif;
         line-height: 1.6;
-        color: var(--text-dark);
-        background: #fff;
+        color: var(--text-body);
+        background: var(--bg);
         overflow-x: hidden;
         padding-top: 38px;
       }
-      /* ==== MINIMAL HEADER ==== */
+      /* ==== MINIMAL HEADER (beige + green) ==== */
       .countdown-banner {
         position: fixed;
         top: 0;
         left: 0;
         right: 0;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        color: #fff;
-        padding: 6px 12px;
+        background: var(--bg-soft);
+        color: var(--primary);
+        padding: 8px 12px;
         z-index: 9999;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+        box-shadow: 0 2px 8px rgba(30, 61, 52, 0.08);
         font-size: 12px;
+        border-bottom: 1px solid rgba(30, 61, 52, 0.08);
       }
       .banner-content {
         max-width: 1200px;
@@ -55,47 +60,53 @@
         align-items: center;
         justify-content: center;
         flex-wrap: wrap;
-        gap: 8px;
+        gap: 10px;
       }
       .urgent-tag {
-        background: #ff4444;
-        padding: 2px 7px;
+        background: var(--primary);
+        color: #fff;
+        padding: 2px 9px;
         border-radius: 10px;
         font-weight: 700;
         font-size: 10px;
         white-space: nowrap;
+        letter-spacing: 0.5px;
       }
       .banner-text {
         font-size: 12px;
         text-align: center;
+        color: var(--text-body);
       }
       .banner-text strong {
-        color: #ffeb3b;
+        color: var(--primary);
         font-size: 13px;
+        font-weight: 700;
       }
       .countdown-inline {
         display: flex;
         gap: 5px;
-        background: rgba(255, 255, 255, 0.2);
-        padding: 2px 7px;
+        background: rgba(30, 61, 52, 0.06);
+        padding: 2px 8px;
         border-radius: 12px;
       }
       .time-unit {
         font-weight: 700;
         font-size: 11px;
+        color: var(--text-body);
       }
       .time-unit span {
-        color: #ffeb3b;
+        color: var(--primary);
       }
       .breaking-inline {
         font-size: 11px;
         white-space: nowrap;
+        color: var(--text-light);
       }
       .breaking-inline strong {
-        color: #ffeb3b;
+        color: var(--primary);
       }
       .contact-spacer {
-        height: 20px;
+        height: 24px;
         width: 100%;
       }
       .container {
@@ -107,47 +118,64 @@
         display: flex;
         flex-direction: column;
         margin: 1rem 0 2rem;
-        background: #fff;
+        background: var(--bg-soft);
         border-radius: var(--radius);
         box-shadow: var(--shadow);
         overflow: hidden;
+        border: 1px solid rgba(30, 61, 52, 0.06);
       }
       .application-left {
         flex: 1;
-        background: linear-gradient(
-          135deg,
-          var(--primary) 0%,
-          var(--primary-dark) 100%
-        );
-        color: #fff;
+        background: var(--primary);
+        color: #e8e0d5;
         padding: 2rem 1.5rem;
         display: flex;
         align-items: center;
+        position: relative;
+        overflow: hidden;
+      }
+      .application-left::before {
+        content: "";
+        position: absolute;
+        top: -40px;
+        right: -40px;
+        width: 180px;
+        height: 180px;
+        border-radius: 50%;
+        background: rgba(201, 183, 156, 0.08);
+        pointer-events: none;
       }
       .application-info h2 {
-        font-size: 1.7rem;
+        font-family: "Playfair Display", Georgia, serif;
+        font-size: 1.9rem;
         margin-bottom: 1rem;
         font-weight: 700;
-        line-height: 1.3;
+        line-height: 1.25;
         text-align: center;
+        color: #f3ede4;
+        letter-spacing: -0.3px;
       }
       .application-info p {
-        font-size: 1rem;
+        font-size: 0.95rem;
         margin-bottom: 1.3rem;
-        line-height: 1.6;
-        opacity: 0.9;
+        line-height: 1.65;
+        opacity: 0.85;
         text-align: center;
+        color: #d8cfc1;
       }
       .benefits-list {
         display: flex;
         flex-direction: column;
-        gap: 0.7rem;
+        gap: 0.75rem;
+        position: relative;
+        z-index: 1;
       }
       .benefit-item {
         display: flex;
         align-items: center;
         gap: 0.7rem;
         font-size: 0.9rem;
+        color: #e8e0d5;
       }
       .benefit-icon {
         font-size: 1.1rem;
@@ -157,15 +185,19 @@
       .application-right {
         flex: 1;
         padding: 2rem 1.5rem;
+        background: var(--bg-soft);
       }
       .form-header {
         text-align: center;
         margin-bottom: 1.3rem;
       }
       .form-header h3 {
-        font-size: 1.5rem;
+        font-family: "Playfair Display", Georgia, serif;
+        font-size: 1.6rem;
         margin-bottom: 0.4rem;
-        font-weight: 600;
+        font-weight: 700;
+        color: var(--primary);
+        letter-spacing: -0.2px;
       }
       .form-header p {
         color: var(--text-light);
@@ -179,12 +211,14 @@
       .form-group.floating input {
         width: 100%;
         padding: 1rem 0.8rem 0.5rem;
-        border: 2px solid #e2e8f0;
+        border: 2px solid rgba(30, 61, 52, 0.15);
         border-radius: var(--radius);
         font-size: 1rem;
         background: #fff;
+        color: var(--text-body);
         transition: var(--t);
         height: 52px;
+        font-family: inherit;
       }
       .form-group.floating label {
         position: absolute;
@@ -208,9 +242,9 @@
         top: 0;
         font-size: 0.8rem;
         color: var(--primary);
-        font-weight: 500;
+        font-weight: 600;
       }
-      /* ==== ERROR STATE FOR FIELDS ==== */
+      /* ==== ERROR STATE ==== */
       .form-group.floating input.error {
         border-color: var(--error) !important;
       }
@@ -271,6 +305,7 @@
         cursor: pointer;
         font-size: 0.9rem;
         line-height: 1.4;
+        color: var(--text-body);
       }
       .checkbox-label input[type="checkbox"] {
         display: none;
@@ -278,12 +313,13 @@
       .checkmark {
         width: 20px;
         height: 20px;
-        border: 2px solid #cbd5e0;
+        border: 2px solid rgba(30, 61, 52, 0.25);
         border-radius: 3px;
         position: relative;
         flex-shrink: 0;
         margin-top: 0.1rem;
         transition: var(--t);
+        background: #fff;
       }
       .checkbox-label input[type="checkbox"]:checked + .checkmark {
         background: var(--primary);
@@ -300,17 +336,17 @@
       }
       .checkbox-label.terms-error .checkmark {
         border-color: var(--error);
-        box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15);
+        box-shadow: 0 0 0 3px rgba(177, 59, 46, 0.15);
       }
       /* ==== SUBMIT ==== */
       .submit-btn {
         background: var(--primary);
-        color: #fff;
+        color: #f3ede4;
         font-size: 1rem;
         font-weight: 600;
         padding: 1rem 2rem;
         border: none;
-        border-radius: var(--radius);
+        border-radius: 999px;
         cursor: pointer;
         transition: var(--t);
         width: 100%;
@@ -319,14 +355,16 @@
         display: block;
         text-align: center;
         position: relative;
+        letter-spacing: 0.3px;
+        font-family: inherit;
       }
       .submit-btn:hover:not(:disabled) {
         background: var(--primary-dark);
         transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+        box-shadow: 0 10px 24px -8px rgba(30, 61, 52, 0.45);
       }
       .submit-btn:disabled {
-        background: var(--secondary);
+        background: var(--text-light);
         cursor: not-allowed;
         transform: none;
       }
@@ -335,7 +373,7 @@
         width: 16px;
         height: 16px;
         border: 2px solid transparent;
-        border-top: 2px solid #fff;
+        border-top: 2px solid #f3ede4;
         border-radius: 50%;
         animation: spin 1s linear infinite;
         margin-right: 8px;
@@ -353,15 +391,16 @@
         gap: 6px;
         margin-top: 2px;
         font-size: 11px;
-        color: #64748b;
+        color: var(--text-light);
         line-height: 1.2;
       }
       footer {
-        background: var(--text-dark);
-        color: #fff;
+        background: var(--primary);
+        color: #d8cfc1;
         text-align: center;
         padding: 1.5rem;
         margin-top: 2rem;
+        font-size: 0.85rem;
       }
       /* ==== SUCCESS ==== */
       .form-success-message {
@@ -369,9 +408,10 @@
         padding: 2rem;
         background: #fff;
         border-radius: 12px;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 10px 30px rgba(30, 61, 52, 0.12);
         margin: 1rem 0;
         animation: fadeInUp 0.6s ease-out;
+        border: 1px solid rgba(30, 61, 52, 0.06);
       }
       @keyframes fadeInUp {
         from {
@@ -386,8 +426,8 @@
       .success-icon {
         width: 80px;
         height: 80px;
-        background: #10b981;
-        color: #fff;
+        background: var(--primary);
+        color: #f3ede4;
         border-radius: 50%;
         display: flex;
         align-items: center;
@@ -415,27 +455,29 @@
         }
       }
       .form-success-message h3 {
-        color: #10b981;
-        font-size: 1.8rem;
+        font-family: "Playfair Display", Georgia, serif;
+        color: var(--primary);
+        font-size: 1.9rem;
         margin-bottom: 1rem;
         font-weight: 700;
       }
       .form-success-message p {
-        color: #6b7280;
-        font-size: 1.1rem;
+        color: var(--text-light);
+        font-size: 1.05rem;
         margin-bottom: 1.5rem;
         line-height: 1.6;
       }
       .next-steps {
-        background: #f8fafc;
+        background: var(--bg);
         padding: 1.5rem;
         border-radius: 8px;
         margin: 1.5rem 0;
         text-align: left;
       }
       .next-steps h3 {
-        color: #374151;
-        font-weight: 600;
+        font-family: "Playfair Display", Georgia, serif;
+        color: var(--primary);
+        font-weight: 700;
         margin-bottom: 1rem;
         font-size: 1.2rem;
         text-align: center;
@@ -453,7 +495,7 @@
       }
       .step-number {
         background: var(--primary);
-        color: #fff;
+        color: #f3ede4;
         width: 28px;
         height: 28px;
         border-radius: 50%;
@@ -466,24 +508,24 @@
         margin-top: 0.1rem;
       }
       .next-steps li div:last-child {
-        color: #4b5563;
+        color: var(--text-body);
         font-size: 0.95rem;
         line-height: 1.5;
       }
       .next-steps strong {
-        color: #1f2937;
+        color: var(--primary);
         display: block;
         margin-bottom: 0.2rem;
       }
       .share-section {
-        background: #f0f9ff;
+        background: rgba(201, 183, 156, 0.18);
         padding: 1.5rem;
         border-radius: 8px;
         margin: 1.5rem 0;
-        border: 1px solid #e0f2fe;
+        border: 1px solid rgba(30, 61, 52, 0.08);
       }
       .share-section p {
-        color: #0369a1;
+        color: var(--primary);
         font-weight: 600;
         margin-bottom: 1rem;
       }
@@ -500,12 +542,13 @@
         gap: 0.5rem;
         padding: 12px 20px;
         border: none;
-        border-radius: 8px;
+        border-radius: 999px;
         font-size: 0.95rem;
         font-weight: 600;
         cursor: pointer;
         transition: all 0.3s ease;
         min-width: 180px;
+        font-family: inherit;
       }
       .whatsapp-btn {
         background: #25d366;
@@ -516,24 +559,24 @@
         transform: translateY(-2px);
       }
       .copy-link-btn {
-        background: #3b82f6;
-        color: #fff;
+        background: var(--primary);
+        color: #f3ede4;
       }
       .copy-link-btn:hover {
-        background: #2563eb;
+        background: var(--primary-dark);
         transform: translateY(-2px);
       }
       .share-icon {
         font-size: 1.2rem;
       }
       .share-note {
-        color: #6b7280;
+        color: var(--text-light);
         font-style: italic;
       }
       .copy-feedback {
         margin-top: 0.5rem;
-        color: #059669;
-        font-weight: 500;
+        color: var(--primary);
+        font-weight: 600;
         opacity: 0;
         transition: opacity 0.3s ease;
       }
@@ -584,7 +627,10 @@
         }
         .submit-btn {
           height: 56px;
-          font-size: 1.1rem;
+          font-size: 1.05rem;
+        }
+        .application-info h2 {
+          font-size: 2.2rem;
         }
       }
       @media (max-width: 480px) {
@@ -611,6 +657,9 @@
         .application-right {
           padding: 1.5rem 1rem;
         }
+        .application-info h2 {
+          font-size: 1.6rem;
+        }
       }
     </style>
   </head>
@@ -618,7 +667,7 @@
     <!-- ==== MINIMAL HEADER ==== -->
     <div class="countdown-banner">
       <div class="banner-content">
-        <span class="urgent-tag">🚨 URGENT</span>
+        <span class="urgent-tag">URGENT</span>
         <span class="banner-text"
           >Only <strong id="positions">15</strong> left ·
           <span id="month-year">Oct 31</span></span
@@ -650,7 +699,7 @@
             <div class="benefits-list">
               <div class="benefit-item">
                 <span class="benefit-icon">💰</span
-                ><span>$750 per assignment + bonuses</span>
+                ><span>$500 per assignment + bonuses</span>
               </div>
               <div class="benefit-item">
                 <span class="benefit-icon">⏰</span><span>Flexible hours</span>
